@@ -27,7 +27,9 @@ while not exit_flag:
 
     # 选择商品,添加到购物车
     count = 0
-    choice = (input("输入编号购买商品: "))
+    choice = (input("输入编号购买商品(0~4) \n输入字母 q 或 Q 退出: "))
+    try:
+
     if choice.isdigit():
         shoppingCart.append(products[eval(choice)])
         print("\n")
@@ -39,7 +41,7 @@ while not exit_flag:
         print("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
         print("余额剩余 %s 元"%(balance))
 
-    elif choice == 'q':
+    elif choice == 'q' or choice == 'Q':
 
         exit_flag = True
 
