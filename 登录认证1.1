@@ -7,45 +7,31 @@ with open('login.txt','r',encoding='utf-8') as f:
     else:
         ls = eval(ls)
 
-
-
-
-# 设定初始登录次数, 如登录错误三次, 则退出程序
+users = {
+    'susan':'123123',
+    'ada':'abc123',
+    'admin':'admin'
+}
 count = 0
+
 while count < 3:
-
-    # 默认可登录用户信息
-    users = [
-        ['susan', '123123'],
-        ['ada', 'abc123'],
-        ['admin', 'admin1'],
-    ]
-
     login_name = input('Pleas input your username: ')
-    # 检查 login_name 是否存在 login.txt 文件的 ls 列表中
     if login_name in ls:
-        print('User Locked, Please contact administrator')
+        print('User locked')
         break
-    # 检查输入的 login_name 和 login_pwd 是否与默认登录用户信息一致
-    for k,v in users:
-        if login_name == k:
 
-            login_pwd = input('Please input your password: ')
-            if login_pwd == v:
-                print('Success, Welcome \033[1;32m %s \033[0m' % login_name)
-
-
-        #     else:
-        #         # 登录信息不一致,则把登录名添加到 ls 列表并写入 login.txt 文件
-        #         # ls.append(login_name)
-        #         # with open('login.txt','w+') as f:
-        #         #     f.write(str(ls))
-        #         #     f.close()
-        #         print('✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖')
-        #         print('Username or password Error', '\n\033[1;31m%s\033[0m more chances left.' % (2 - count))
-        #         print('✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖')
-        #         count += 1
-        else:
-
+    elif login_name in users.keys():
+        login_pwd = input('Please input your password: ')
+        if login_pwd == users[login_name]:
+            print("Welcome \033[7;34m %s \033[1m" %login_name)
             break
-        print('Not the correct username')
+        else:
+            print('Password is wrong! \n\033[1;31m%s\033[0m more chances left.' % (2 - count))
+            count += 1
+            if count == 3:
+                with open('login.txt', 'w+') as f:
+                    ls.append(login_name)
+                    f.write(str(ls))
+                    f.close()
+    else:
+        print('\033[1;31m Invalid user \033[0m')
