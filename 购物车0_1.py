@@ -12,18 +12,19 @@ with open('shoppingCart.txt','r',encoding='utf-8') as f:
         f.close()
     else:
         temp = eval(temp)
-        if temp[login_name] in temp:
+        if login_name in temp.items():
             print(temp[login_name][-1])
     # 充值
         else:
             if temp[login_name][-1] == 0:
-            balance = 0
-            print("余额为0,请充值后再购买商品")
-            balance = int(input("请输入充值金额(元): "))
-            print('+++++++++++++++++++++++++++')
-            print("现余额为\033[1;31m %s \033[0m元" % balance)
-            print('+++++++++++++++++++++++++++')
-
+                balance = 0
+                print("余额为0,请充值后再购买商品")
+                balance = int(input("请输入充值金额(元): "))
+                print('+++++++++++++++++++++++++++')
+                print("现余额为\033[1;31m %s \033[0m元" % balance)
+                print('+++++++++++++++++++++++++++')
+            else:
+                balance = temp[login_name][-1]
             # 设置退出标签
             # 设置购物车空列表
             shoppingCart = []
@@ -83,3 +84,9 @@ with open('shoppingCart.txt','r',encoding='utf-8') as f:
                             # print(temp[login_name])
                             for k, v in enumerate(temp[login_name]):
                                 print(k, v['name'], v['price'])
+
+
+
+
+
+
